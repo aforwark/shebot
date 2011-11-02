@@ -23,6 +23,7 @@
     "sprintf": "*",
     "jsdom": "*",
     "hashlib": "*",
-    "wolfram": "*"
+    "wolfram": "*",
+    "xml2js": "*"
   }
 }
