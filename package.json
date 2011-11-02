@@ -16,6 +16,13 @@
 
   "dependencies": {
     "hubot": ">= 1.0.6",
-    "hubot-scripts": ">= 1.0.4"
+    "hubot-scripts": ">= 1.0.4",
+    "soupselect": "*",
+    "htmlparser": "*",
+    "wwwdude": "*",
+    "sprintf": "*",
+    "jsdom": "*",
+    "hashlib": "*",
+    "wolfram": "*"
   }
 }
