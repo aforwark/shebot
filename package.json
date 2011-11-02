@@ -25,6 +25,7 @@
     "hashlib": "*",
     "wolfram": "*",
     "xml2js": "*",
-    "optparse": "*"
+    "optparse": "*",
+    "redis": "*"
   }
 }
