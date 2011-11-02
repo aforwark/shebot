@@ -24,6 +24,7 @@
     "jsdom": "*",
     "hashlib": "*",
     "wolfram": "*",
-    "xml2js": "*"
+    "xml2js": "*",
+    "optparse": "*"
   }
 }
