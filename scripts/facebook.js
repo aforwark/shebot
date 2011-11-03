@@ -6,7 +6,7 @@
     module.exports = function(robot) {
         var baseUrl = 'https://graph.facebook.com/?id=';
 
-        return robot.hear(/likes? (?:for )?(https?:\/\/(?!\s+))/i, function(msg) {
+        return robot.hear(/likes? (?:for )?(https?:\/\/.+?)(?:\s|$)/i, function(msg) {
             var url;
             url = baseUrl + escape(msg.match[1]);
 
