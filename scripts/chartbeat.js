@@ -30,8 +30,11 @@
             var host;
             host = msg.match[1];
 
-            getClient().request('quickstats', { host:host }, function (data) {
-                msg.send(JSON.stringify(data));
+            return msg.http("http://api.chartbeat.com/quickstats/?host=" + (escape(host)) + "&apikey=" + process.env.HUBOT_CHARTBEAT_APIKEY).get()(function(err, res, body) {
+              var definitions, lastSpeechType, reply;
+              definitions = JSON.parse(body);
+              
+              msg.send(body);
             });
         });
     };
