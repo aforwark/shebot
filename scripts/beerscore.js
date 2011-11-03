@@ -12,7 +12,7 @@
             console.log("Request: " + baseUrl+beer);
             return msg.http(baseUrl+beer).get()(function(err, res, body) {
                 var object, found = 0;
-                if (res.statusCode === 404) {
+                if (res.statusCode !== 200) {
                     return msg.send('Beer not found.');
                 } else {
                     object = JSON.parse(body);
