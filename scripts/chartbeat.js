@@ -30,11 +30,8 @@
             var host;
             host = msg.match[1];
 
-            return msg.http("http://api.chartbeat.com/quickstats/?host=" + (escape(host)) + "&apikey=" + process.env.HUBOT_CHARTBEAT_APIKEY).get()(function(err, res, body) {
-              var definitions, lastSpeechType, reply;
-              definitions = JSON.parse(body);
-              
-              msg.send(body);
+            getClient().request('quickstats', { host:host }, function (data) {
+                msg.send(sprintf("There are %s people on %s right now", data.people, host));
             });
         });
     };
