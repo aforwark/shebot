@@ -2,7 +2,7 @@ module.exports = function(robot) {
     var exec = require('child_process').exec,
         lock = false;
 
-    robot.hear(/^say (.+?$/i, function (msg) {
+    robot.hear(/^say (.+?)$/i, function (msg) {
         if (true === lock) {
             return msg.send("Settle down there tiger.");
         }
