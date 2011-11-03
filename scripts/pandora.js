@@ -73,7 +73,7 @@ module.exports = function(robot) {
             try {
                 var song = JSON.parse(data.toString());
                 
-                msg.send('Playing "%s" by "%s"', song.title, song.artist);
+                msg.send(sprintf('Playing "%s" by "%s"', song.title, song.artist));
             } catch (e) {
                 return msg.send('There was a problem parsing the song data... fail!');
             }
