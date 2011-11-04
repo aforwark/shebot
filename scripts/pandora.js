@@ -59,7 +59,7 @@ module.exports = function(robot) {
                 return;
             }
             
-            msg.send('This song has got some lovin\'!');
+            msg.send('This song just got some lovin\'!');
         })
     });
     
