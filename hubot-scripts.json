@@ -1,8 +1,8 @@
 [
   "redis-brain",
-  "adult", "auto-stache", "beerscore", "bees", "chartbeat", "facebook", "flip", "fortune",
-  "github-issues", "google", "google-images", "haters", "help", "hideyakids", "likeaboss",
-  "maps", "math", "pandora", "ping", "polite", "retaliation", "roles",
-  "rubygems", "rules", "say", "shipit", "soundboard", "storage", "storage",
+  "adult", "auto-stache", "beerscore", "bees", "chartbeat", "facebook", "filecache",
+  "flip", "fortune", "github-issues", "google", "google-images", "haters", "help",
+  "hideyakids", "likeaboss", "maps", "math", "pandora", "ping", "polite", "retaliation",
+  "roles", "rubygems", "rules", "say", "shipit", "soundboard", "storage", "storage",
   "sudo", "tweet", "vanity", "wolfram", "xkcd", "youtube"
 ]
