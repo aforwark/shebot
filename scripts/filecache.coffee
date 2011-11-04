@@ -47,7 +47,8 @@ module.exports = (robot) ->
         url = msg.match[1]
 
         request 'GET', url, (req, res) ->
-            if res.headers['X-Cache-Source'] is 'file'
-                msg.send "#{url} is cached!"
-            else
-                msg.send "#{url} is NOT CACHED!"
+            res.on "end", () ->
+                if res.headers['X-Cache-Source'] is 'file'
+                    msg.send "#{url} is cached!"
+                else
+                    msg.send "#{url} is NOT CACHED!"
