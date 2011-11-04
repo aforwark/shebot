@@ -5,8 +5,8 @@ module.exports = function(robot) {
     /**
      * @todo use fs.readdirSync to show optional sounds.
      */
-     robot.respond(/soundboard help/i, function(msg) {
-         return msg.send("Options: soundboard [be_back, mother_talk, no_problemo, terminator, get_down]");
+     robot.respond(/soundboard help/i, function (msg) {
+         return msg.send("Options: soundboard [winning, terminator]");
      });
     
     robot.hear(/^soundboard (.+?)$/i, function (msg) {
@@ -17,9 +17,10 @@ module.exports = function(robot) {
         lock = true;
         
         exec(
-            "afplay " + '~/Music/soundboard/' + msg.match[1] + '.wav',
+            "afplay " + '~/Music/soundboard/' + msg.match[1] + '.mp3',
             function (error, stdout, stderr) {
                 lock = false;
+                return msg.send(stdout);
             }
         );
     });
