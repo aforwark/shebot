@@ -6,36 +6,48 @@
 HTTP = require "http"
 URL  = require "url"
 
+request = (method, url, cb) ->
+    parsedUrl = URL.parse(url)
+    options     =
+        host: parsedUrl.host
+        port: 80
+        path: '/'
+        method: method
+
+    req = HTTP.request options, (res) ->
+        res.setEncoding("utf8")
+
+        cb req, res
+
+    req.on "error", (e) ->
+
+    req.end()
+
 purge = (url) ->
-  parsedUrl = URL.parse(url)
-  options   =
-    host: parsedUrl.host
-    port: 80
-    path: '/'
-    method: 'PURGE'
-
-  req = HTTP.request options, (res) ->
-    body = ""
-    res.setEncoding("utf8")
-    res.on "data", (chunk) ->
-      body += chunk
-    res.on "end", () ->
-      data =
-        response:
-          body: body
-          status: res.statusCode
-
-  req.on "error", (e) ->
-
-  req.end()
-
+    request 'PURGE', url, (req, res) ->
+        body = ""
+        res.on "data", (chunk) ->
+            body += chunk
+        res.on "end", () ->
+            data =
+                response:
+                    body: body
+                    status: res.statusCode
 
 module.exports = (robot) ->
 
-    robot.hear /^purge (http?:\/\/.+?)/, (msg) ->
+    robot.hear /^purge (http:\/\/.+?)/, (msg) ->
         url = msg.match[1]
 
         purge url
 
         msg.send "Purging #{url}"
 
+    robot.hear /^is (http:\/\/.+?) cached?/, (msg) ->
+        url = msg.match[1]
+
+        request 'GET', url, (req, res) ->
+            if res.headers['X-Cache-Source'] is 'file'
+                msg.send "#{url} is cached!"
+            else
+                msg.send "#{url} is NOT CACHED!"
