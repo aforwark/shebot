@@ -11,7 +11,7 @@ request = (method, url, cb) ->
     options     =
         host: parsedUrl.host
         port: 80
-        path: '/'
+        path: parsedUrl.pathname || "/"
         method: method
 
     req = HTTP.request options, (res) ->
