@@ -1,3 +1,17 @@
+# Controls a pianobar instance
+#
+# pandora play - Plays Pandora
+# pandora pause - same
+# pandora love - Love the current song
+# pandora hate - Ban the current song
+# pandora ban - "
+# pandora i hate this song - "
+# pandora noo+ - " (must have at least 2 o's)
+# pandora next - go to the next song
+# pandora skip - "
+# pandora info - Display information about the current song
+#
+
 fs = require 'fs'
 exec = require('child_process').exec
 sprintf = require("sprintf").sprintf
@@ -12,7 +26,7 @@ module.exports = (robot) ->
         exec c, cb;
     
     
-    robot.hear /^pandora play/, (msg) ->
+    robot.hear /^pandora (play|pause)/, (msg) ->
         cmd 'p', (err, stdout, stderr) ->
             if err
                 msg.send 'Error communicating with pianobar!'
@@ -28,7 +42,7 @@ module.exports = (robot) ->
                 msg.send 'Moving on...'
 
     
-    robot.hear /^pandora i hate this song/, (msg) ->
+    robot.hear /^pandora (i hate this song|hate|ban|noo+)/, (msg) ->
         cmd '-', (err, stdout, stderr) ->
             if err
                 msg.send 'Error communicating with pianobar!'
@@ -36,7 +50,7 @@ module.exports = (robot) ->
                 msg.send 'This song has been banned!'
     
     
-    robot.hear /^i'?m tired of this song/, (msg) ->
+    robot.hear /^(i'?m tired of this song|pandora (tired|this is old|bored|bleh|meh))/, (msg) ->
         cmd 't', (err, stdout, stderr) ->
             if err
                 msg.send 'Error communicating with pianobar!'
@@ -44,7 +58,7 @@ module.exports = (robot) ->
                 msg.send 'This song has been removed for 30 days'
     
     
-    robot.hear /^pandora i love this song/, (msg) ->
+    robot.hear /^pandora (i love this song|love|nice|great song)/, (msg) ->
         cmd '+', (err, stdout, stderr) ->
             if err
                 msg.send 'Error communicating with pianobar!'
