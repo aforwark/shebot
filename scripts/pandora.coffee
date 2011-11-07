@@ -12,6 +12,7 @@ exec = require('child_process').exec
 sprintf = require("sprintf").sprintf
 
 module.exports = (robot) ->
+    last_song = null;
 
     getCommand = (command, ctl) ->
         "echo #{command} > #{ctl}"
@@ -19,6 +20,14 @@ module.exports = (robot) ->
     cmd = (command, cb) ->
         c = getCommand command, process.env.HUBOT_PANDORA_CTL
         exec c, cb;
+
+    fs.watchFile "/tmp/nowplaying", (curr, prev) ->
+        if curr.mtime is prev.mtime
+            return
+
+        getSongInfo (err, data) ->
+            if last_song is null or (last_song.title != data.title and last_song.artist != data.artist)
+                robot.send { room:'#sheknowsdev-alpha' }, sprintf('Playing "%s" by "%s"', data.title, data.artist)
 
     getSongInfo = (cb) ->
         fs.readFile '/tmp/nowplaying', (err, data) ->
