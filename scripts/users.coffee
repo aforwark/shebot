@@ -14,12 +14,12 @@ module.exports = (robot) ->
             robot.send user, "You can only register via a PM"
         else if email = msg.match[1]
             if user.id is undefined
-                next_id = 1
+                next_id = 0
 
                 for own user_id, u of brain.data.users
-                    next_id = user_id + 1 if user_id > next_id
+                    next_id = user_id if user_id > next_id
 
-                user.id = next_id
+                user.id = next_id + 1
 
             user.email_address = email
             brain.data.users[user.id or user.name] = user
