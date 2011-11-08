@@ -19,7 +19,6 @@
     "hubot-scripts": ">= 1.0.4",
     "soupselect": "*",
     "htmlparser": "*",
-    "wwwdude": "*",
     "sprintf": "*",
     "jsdom": "*",
     "hashlib": "*",
