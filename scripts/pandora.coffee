@@ -89,5 +89,5 @@ module.exports = (robot) ->
             if err
                 msg.send err
             else
-                msg.send sprintf('♫ "%s" by "%s" ♫'', data.title, data.artist)
+                msg.send sprintf('♫ "%s" by "%s" ♫', data.title, data.artist)
 
