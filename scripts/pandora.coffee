@@ -27,7 +27,7 @@ module.exports = (robot) ->
 
         getSongInfo (err, data) ->
             if last_song is null or (last_song.title != data.title and last_song.artist != data.artist)
-                robot.send { room:'#sheknowsdev' }, sprintf('Playing "%s" by "%s"', data.title, data.artist)
+                robot.send { room:'#sheknowsdev' }, sprintf('♫ "%s" by "%s" ♫', data.title, data.artist)
                 
             last_song = data
 
@@ -89,5 +89,5 @@ module.exports = (robot) ->
             if err
                 msg.send err
             else
-                msg.send sprintf('Playing "%s" by "%s"', data.title, data.artist)
+                msg.send sprintf('♫ "%s" by "%s" ♫'', data.title, data.artist)
 
