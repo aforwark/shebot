@@ -14,6 +14,7 @@ Woot = (callback = null) ->
         res.on "end", () ->
             callback chomp body if callback?
 
+    req.setTimeout 45000
     req.on "error", (e) ->
     req.end()
 
@@ -21,13 +22,21 @@ module.exports = (robot) ->
     
     lastWoot = null
     interval = null
-    wootoffRegex = /\d+% : | : SOLD OUT/g
+
+    cleanWoot = (text) ->
+        # Small coffeescript problem: the syntax checker does not recognize a
+        # regex pattern beginning with a space (it parses it as division
+        # instead,) so I have to use a workaround 
+        regexps = [ /^\d+% : /, /(?: ): SOLD OUT$/ ]
+        cleanedText = text
+        cleanedText = cleanedText.replace regexp, "" for regexp in regexps
+        return cleanedText
 
     timer = (msg) ->
         Woot (body) ->
             if lastWoot?
-                bodyTest = body.replace wootoffRegex, ""
-                lastWootTest = lastWoot.replace wootoffRegex, ""
+                bodyTest = cleanWoot body
+                lastWootTest = cleanWoot lastWoot
                 if bodyTest isnt lastWootTest
                     msg.send "[WOOT-OFF] #{ bodyTest }"
             lastWoot = body
