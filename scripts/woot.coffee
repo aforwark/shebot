@@ -5,16 +5,19 @@ HTTP = require "http"
 chomp = (text) ->
     return text.replace /(\n|\r)+$/, ""
 
-Woot = (callback = null) ->
+Woot = (successCallback = null, timeoutCallback = null) ->
     req = HTTP.request { host: "www.woot.com", path: "/DefaultMicrosummary.ashx" }, (res) ->
         body = ""
         res.setEncoding("utf8")
         res.on "data", (chunk) ->
             body += chunk
         res.on "end", () ->
-            callback chomp body if callback?
+            successCallback chomp body if successCallback?
 
-    req.setTimeout 45000
+    req.setTimeout 45000, (e) ->
+        timeoutCallback(e) if timeoutCallback?
+        req.end()
+
     req.on "error", (e) ->
     req.end()
 
